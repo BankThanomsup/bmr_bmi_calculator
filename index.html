@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
+    </script>
+    <style>
+        #bmiContainer {
+            display: block;
+        }
+
+        #bmrContainer {
+            display: none;
+        }
+
+        .bmiCalculateContainer {
+            display: flex;
+        }
+        .bmrCalculateContainer{
+            display: flex;
+        }
+        .bmiForm {
+            width: 200px;
+            text-align: center;
+        }
+
+        .bmiResult {
+            margin-left: 25px;
+            width: calc(100% - 225px);
+        }
+
+        .bmrForm {
+            width: 200px;
+            text-align: center;
+        }
+        .bmrResult {
+            margin-left: 25px;
+            width: calc(100% - 225px);
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <header class="p-3 mb-3 border-bottom">
+            <button id="bmiNav" type="button" class="btn btn-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-universal-access" viewBox="0 0 16 16">
+                    <path
+                        d="M9.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM6 5.5l-4.535-.442A.531.531 0 0 1 1.531 4H14.47a.531.531 0 0 1 .066 1.058L10 5.5V9l.452 6.42a.535.535 0 0 1-1.053.174L8.243 9.97c-.064-.252-.422-.252-.486 0l-1.156 5.624a.535.535 0 0 1-1.053-.174L6 9V5.5Z" />
+                </svg>ดัชนีมวลกาย
+            </button>
+            <button id="bmrNav" type="button" class="btn btn-light">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-fire"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M8 16c3.314 0 6-2 6-5.5 0-1.5-.5-4-2.5-6 .25 1.5-1.25 2-1.25 2C11 4 9 .5 6 0c.357 2 .5 4-2 6-1.25 1-2 2.729-2 4.5C2 14 4.686 16 8 16Zm0-1c-1.657 0-3-1-3-2.75 0-.75.25-2 1.25-3C6.125 10 7 10.5 7 10.5c-.375-1.25.5-3.25 2-3.5-.179 1-.25 2 1 3 .625.5 1 1.364 1 2.25C11 14 9.657 15 8 15Z" />
+                </svg>การเผาผลาญ
+            </button>
+        </header>
+        <div id="bmiContainer">
+            <h3 style="color: rgb(241, 90, 2);"><svg xmlns="http://www.w3.org/2000/svg" width="60" height="50"
+                    fill="currentColor" class="bi bi-arrow-down-circle-fill" viewBox="0 0 16 16">
+                    <path
+                        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z" />
+                </svg>คำนวณดัชนีมวลกาย (BMI)</h3>
+            <div class="p-4 mb-3 bg-light rounded">
+                <h4>ดัชนีมวลร่างกาย ?</h4>
+            </div>
+            <div class="p-4 mb-3 bg-light rounded">
+                <p>การวัดดัชนีมวลร่างกาย Body Mass Index (BMI) คือ อัตราส่วนระหว่างน้ำหนักต่อส่วนสูง
+                    ที่ใช้บ่งว่าอ้วนหรือผอม
+                    ในผู้ใหญ่ตั้งแต่อายุ 20 ปีขึ้นไป ความสำคัญของการรู้ค่าดัชนีมวลร่างกาย
+                    เพื่อดูอัตราการเสี่ยงต่อการเกิดโรคต่างๆ
+                    ถ้าค่าที่คำนวนได้ มากหรือน้อยเกินไป เพราะถ้าเป็นโรคอ้วนแล้ว
+                    จะมีภาวะเสี่ยงต่อการเป็นโรคความดันโลหิตสูง
+                    โรคเบาหวาน โรคหัวใจขาดเลือด และโรคนิ่วในถุงน้ำดี แต่ในขณะเดียวกัน ผู้ที่ผอมเกินไป
+                    ก็จะเสี่ยงต่อการติดเชื้อ
+                    ประสิทธิภาพในการทำงานของร่างกายลดลง ดังนั้นควรรักษาระดับน้ำหนักให้อยู่ในเกณฑ์ปกติ</p>
+            </div>
+
+            <!-- เริ่ม โปรแกรมคำนวณดัชนีมวลกายBMI -->
+
+            <p class="fs-2">โปรแกรมคำนวณดัชนีมวลกาย</p>
+            <div class="bmiCalculateContainer">
+                <div class="bmiForm">
+                    <form onsubmit="event.preventDefault();bmiCalculate();">
+                        <div class="form-floating mb-3">
+                            <input type="number" class="form-control" id="heightbmi" min="0" step="0.01"
+                                placeholder="ป้อนส่วนสูงของคุณ" required>
+                            <label for="heightbmi">ส่วนสูง (เซนติเมตร)</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="number" class="form-control" id="weightbmi" min="0" step="0.01"
+                                placeholder="ป้อนน้ำหนักของคุณ" required>
+                            <label for="weightbmi">น้ำหนัก (กิโลกรัม)</label>
+                        </div>
+                        <button id="calculateBtn" type="submit" class="btn btn-success">คำนวณค่า BMI</button>
+                        <div id="resultbmi"></div>
+                    </form>
+                </div>
+                <div class="p-4 mb-3 bg-light rounded bmiResult">
+                    <h4>ดัชนีมวลกายของคุณ = <span id="bmiScore"> </span></h4>
+                    <hr>
+                    <p id="bmiDetail"></p>
+                </div>
+            </div>
+        </div>
+        <!-- จบ โปรแกรมคำนวณดัชนีมวลกาย BMI-->
+        <!-- เริ่มหน้า BMR -->
+        <div id="bmrContainer">
+            <h3 style="color: rgb(241, 90, 2);"><svg xmlns="http://www.w3.org/2000/svg" width="60" height="50"
+                    fill="currentColor" class="bi bi-arrow-down-circle-fill" viewBox="0 0 16 16">
+                    <path
+                        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z" />
+                </svg>คำนวณการเผาผลาญพลังงาน (BMR)</h3>
+            <div class="p-4 mb-3 bg-light rounded">
+                <h4>อัตราการความต้องการเผาผลาญ (BMR)?</h4>
+            </div>
+            <div class="p-4 mb-3 bg-light rounded">
+                <p>อัตราการความต้องการเผาผลาญ หรือ Basal Metabolic Rate (BMR) คือ
+                    อัตราการความต้องการเผาผลาญของร่างกายในชีวิตประจำวัน
+                    หรือจำนวนแคลอรี่ขั้นต่ำที่ต้องการใช้ในชีวิตแต่ละวัน ดังนั้นการคำนวณ BMR
+                    จะช่วยให้คุณคำนวณปริมาณแคลอรี่ที่ใช้ต่อวันเพื่อรักษาน้ำหนักปัจจุบันได้
+                    และเมื่ออายุมากขึ้นเราจะควบคุมน้ำหนักได้ยากขึ้น เพราะ BMR เราลดลง
+                    การอดอาหารก็เป็นสาเหตุหนึ่งที่ทำให้ BMR ลดลง วิธีป้องกันคือ "หมั่นออกกำลังกาย"
+                    เพื่อเพิ่มประสิทธิภาพของการเผาผลาญ ซึ่งจะทำให้ BMR ไม่ลดลงเร็วเกินไป
+                </p>
+            </div>
+            <!-- เริ่ม โปรแกรมคำนวณการเผาผลาญ BMR -->
+            <p class="fs-2">โปรแกรมคำนวณการเผาผลาญ</p>
+            <div class="bmrCalculateContainer">
+                <div class="bmrForm">
+                    <form onsubmit="event.preventDefault();bmrCalculate();">
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="sexbmr">เพศ</label>
+                        <select class="form-select" id="sexbmr">
+                            <option value="65">ชาย</option>
+                            <option value="665">หญิง</option>
+                        </select>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="number" class="form-control" id="heightbmr" min="0" step="0.01"
+                            placeholder="ป้อนส่วนสูงของคุณ" required>
+                        <label for="heightbmr">ส่วนสูง (เซนติเมตร)</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="number" class="form-control" id="weightbmr" min="0" step="0.01"
+                            placeholder="ป้อนน้ำหนักของคุณ" required>
+                        <label for="weightbmr">น้ำหนัก (กิโลกรัม)</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="number" class="form-control" id="agebmr" min="0" placeholder="ป้อนน้ำหนักของคุณ"
+                            required>
+                        <label for="agebmr">อายุ(ปี)</label>
+                    </div>
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="activitybmr">กิจกรรม</label>
+                        <select class="form-select" id="activitybmr">
+                            <option value="1.2">ไม่ออกกำลังกายหรือออกกำลังกายน้อยมาก</option>
+                            <option value="1.375">ออกกำลังกายน้อยเล่นกีฬา 1-3วัน /สัปดาห์</option>
+                            <option value="1.55">ออกกำลังกายปานกลางเล่นกีฬา 3-5 วัน/สัปดาห์</option>
+                            <option value="1.725">ออกกำลังกายหนักเล่นกีฬา 6-7 วัน/สัปดาห์</option>
+                            <option value="1.9">ออกกำลังกายหนักมากเป็นนักกีฬา</option>
+                        </select>
+                    </div>
+                    <button id="calculateBtnBMR" type="submit" class="btn btn-success">คำนวณค่า BMR </button>
+                    <div id="resultbmr"></div>
+                    </form>
+                </div>
+                <div class="p-4 mb-3 bg-light rounded bmrResult">
+                    <h4>BMR (Basal Metabolic Rate) พลังงานที่จำเป็นพื้นฐานในการมีชีวิต = <span id="bmrScore"> </span></h4>
+                    <hr>
+                    <h4>TDEE (Total Daily Energy Expenditure) พลังงานที่คุณใช้ในแต่ละวัน = <span id="TDEEScore"> </span></h4>
+                    <hr>
+                    <p id="bmrDetail"></p>
+                </div>
+            </div>
+            <!-- จบ โปรแกรมคำนวณการเผาผลาญ bmr-->
+
+            <!-- Javascript -->
+            <script>
+                document.getElementById('bmiNav').addEventListener('click', () => {
+                    document.getElementById('bmrContainer').style.display = "none"
+                    document.getElementById('bmiContainer').style.display = "block"
+                    document.getElementById('bmiNav').classList.add("btn-primary")
+                    document.getElementById('bmiNav').classList.remove("btn-light")
+                    document.getElementById('bmrNav').classList.remove("btn-primary")
+                    document.getElementById('bmrNav').classList.add("btn-light")
+                })
+                document.getElementById('bmrNav').addEventListener('click', () => {
+                    document.getElementById('bmiContainer').style.display = "none"
+                    document.getElementById('bmrContainer').style.display = "block"
+                    document.getElementById('bmrNav').classList.add("btn-primary")
+                    document.getElementById('bmrNav').classList.remove("btn-light")
+                    document.getElementById('bmiNav').classList.remove("btn-primary")
+                    document.getElementById('bmiNav').classList.add("btn-light")
+                })
+                const bmiResult = [{
+                        "title": "โรคอ้วนขั้นสูงสุด",
+                        "detail": ""
+                    },
+                    {
+                        "title": "โรคอ้วนระดับ2",
+                        "detail": "คุณเสี่ยงต่อการเกิดโรคที่มากับความอ้วน หากคุณมีเส้นรอบเอวมากกว่าเกณฑ์ปกติคุณจะเสี่ยงต่อการเกิดโรคสูง คุณต้องควบคุมอาหาร และออกกำลังกายอย่างจริงจัง"
+                    },
+                    {
+                        "title": "โรคอ้วนระดับ1",
+                        "detail": "และหากคุณมีเส้นรอบเอวมากกว่า 90 ซม.(ชาย) 80 ซม.(หญิง) คุณจะมีโอกาศเกิดโรคความดัน เบาหวานสูง จำเป็นต้องควบคุมอาหาร และออกกำลังกาย"
+                    },
+                    {
+                        "title": "น้ำหนักเกิน",
+                        "detail": "หากคุณมีกรรมพันธ์เป็นโรคเบาหวานหรือไขมันในเลือดสูงต้องพยายามลดน้ำหนักให้ดัชนีมวลกายต่ำกว่า 23"
+                    },
+                    {
+                        "title": "น้ำหนักปกติ",
+                        "detail": "และมีปริมาณไขมันอยู่ในเกณฑ์ปกติ มักจะไม่ค่อยมีโรคร้าย อุบัติการณ์ของโรคเบาหวาน ความดันโลหิตสูงต่ำกว่าผู้ที่อ้วนกว่านี้"
+                    },
+                    {
+                        "title": "น้ำหนักน้อยเกินไป",
+                        "detail": "ซึ่งอาจจะเกิดจากนักกีฬาที่ออกกำลังกายมาก และได้รับสารอาหารไม่เพียงพอ วิธีแก้ไขต้องรับประทานอาหารที่มีคุณภาพ และมีปริมาณพลังงานเพียงพอ และออกกำลังกายอย่างเหมาะสม"
+                    }
+                ]
+                    const bmrResult =  
+                        "จะสังเกตได้ว่าน้ำหนัก ส่วนสูงและอายุมีผลต่อการเผาผลาญพลังงาน เมื่อหาค่า BMR (Basal Metabolic Rate) มาแล้วเราก็จะสามารถรู้ได้ว่าเรามีการการเผาผลาญพลังงานโดยไม่ทำกิจกรรมอะไรเลยเท่าไร แต่หากเรามีกิจกรรมอย่างออกกำลังกายจะมีการเผาผลาญพลังงานโดยจะเรียกว่าค่าTDEE คือ ค่าของพลังงานที่ใช้กิจกรรมอื่นในแต่ละวัน"
+                    
+
+
+                //const bmrCalculateMale =() => {
+                  //  const  sex = document.getElementById("sexbmr").value("1");
+                    //const  weight = parseFloat(document.getElementById("weightbmr").value)*13.7;
+                    //const  height = parseFloat(document.getElementById("heightbmr").value)*5;
+                    //const  age    = parseFloat(document.getElementById("agebmr").value)*6.8;
+                    //const activitybmr = document.getElementById("activitybmr").value
+                    //const  bmr = 66 + weight + height -age 
+                    //แสดงผลลัพธ์
+                    //let resultText ='';
+                    //if(isNaN(bmr)){
+                     //   resultText = 'โปรดป้อนค่าที่ถูกต้อง'
+                    //}
+                    //else{
+                      //  resultText = bmr.toFixed(4)
+                   // }
+                //};
+
+                const bmrCalculate =() => {
+                    const  sexbmr = parseInt(document.getElementById("sexbmr").value);
+                    const  weightbmr = parseFloat(document.getElementById("weightbmr").value);
+                    const  heightbmr = parseFloat(document.getElementById("heightbmr").value);
+                    const  agebmr    = parseFloat(document.getElementById("agebmr").value);
+                    const activitybmr = parseFloat(document.getElementById("activitybmr").value)
+                    const  bmr = Math.round(sexbmr + (weightbmr*9.6) + (heightbmr*1.8) - (agebmr*4.7)) ;
+                    const   tdee = Math.round(bmr*activitybmr);
+                    
+
+                    
+                    
+                    
+                    //แสดงผลลัพธ์
+                    document.getElementById("bmrScore").textContent = bmr + " กิโลแคลอรี่ " ; 
+                    document.getElementById("TDEEScore").textContent= tdee + " กิโลแคลอรี่ " ; 
+                    document.getElementById("bmrDetail").textContent = bmrResult ;
+                    
+                };
+
+              
+                const bmiCalculate = () => {
+                    const weightbmi = parseFloat(document.getElementById('weightbmi').value);
+                    const heightbmi = parseFloat(document.getElementById('heightbmi').value) / 100;
+                    const bmi = weightbmi / (Math.pow(heightbmi, 2));
+
+                    //แสดงผลลัพธ์
+                    let resultText = '';
+                    if (isNaN(bmi)) {
+                        resultText = 'โปรดป้อนค่าที่ถูกต้อง';
+                    } else {
+                        resultText = bmi.toFixed(2);
+                        var resultIndex;
+                        if (resultText >= 40) {
+                            resultIndex = 0;
+                        } else if (resultText >= 35) {
+                            resultIndex = 1;
+                        } else if (resultText >= 28.5) {
+                            resultIndex = 2;
+                        } else if (resultText >= 23.5) {
+                            resultIndex = 3;
+                        } else if (resultText >= 18.5) {
+                            resultIndex = 4;
+                        } else {
+                            resultIndex = 5;
+                        }
+                    }
+                    document.getElementById("bmiScore").textContent = resultText + "(" + bmiResult[resultIndex]
+                        .title +
+                        ")";
+                    document.getElementById("bmiDetail").textContent = bmiResult[resultIndex].detail;
+                    return false;
+                }
+            </script>
+            
+</body>
+
+</html>
