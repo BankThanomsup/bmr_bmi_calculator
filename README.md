@@ -2,7 +2,7 @@
 
 A simple web application to calculate **BMR** (Basal Metabolic Rate) and **BMI** (Body Mass Index), built with pure **HTML**, **CSS**, and **JavaScript**.
 
-Live Demo: [[https://bmr-bmi-calculator.web.app/](https://bmr-bmi-calculator.web.app/)](https://bmr-bmi-calculator-9ys7g92ew-bankthanomsups-projects.vercel.app/)
+Live Demo: [https://bmr-bmi-calculator-9ys7g92ew-bankthanomsups-projects.vercel.app/)]
 
 ## Features
 
